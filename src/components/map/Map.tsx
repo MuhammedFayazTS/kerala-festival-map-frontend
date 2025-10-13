@@ -29,7 +29,9 @@ const Map = () => {
         }
     }, [])
     return (
-        <div className="w-full h-screen bg-gray-100" ref={mapContainerRef} />
+        <section className='px-3 pb-2 sm:pb-0 relative overflow-hidden w-full h-full rounded-xl bg-gray-50 dark:bg-neutral-900'>
+            <div className="absolute w-full h-full rounded-xl" ref={mapContainerRef} />
+        </section>
     )
 }
 
