@@ -1,21 +1,6 @@
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-
-interface Location {
-    district: string
-    place: string
-}
-
-interface Festival {
-    id: number
-    name: string
-    startDate: string
-    endDate: string
-    location: Location
-    description: string
-    images: string[]
-    tags: string[]
-}
+import type { Festival } from "@/types/festival"
 
 //TODO: replace with optimised vector image
 const fallbackImage =

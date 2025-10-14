@@ -6,6 +6,9 @@ import {
 import Map from "@/components/map/Map"
 import FestivalList from "@/components/FestivalList"
 import { useEffect, useState } from "react";
+import { useQuery } from "@tanstack/react-query";
+import { fetchFestivalData } from "@/lib/api";
+import { toast } from "sonner";
 
 const Index = () => {
   const [clientLoaded, setClientLoaded] = useState(false);
@@ -16,10 +19,26 @@ const Index = () => {
     const checkMobile = () => {
       setIsMobile(window.innerWidth < 768);
     };
-
     window.addEventListener('resize', checkMobile);
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
+
+  const { data, isLoading, error } = useQuery({
+    queryKey: ["festivals"],
+    queryFn: fetchFestivalData,
+    meta: {
+      onError: () => {
+        toast.error("Error", {
+          description: "Failed to fetch dam data. Please try again later.",
+          style: {
+            '--normal-bg': 'color-mix(in oklab, var(--destructive) 10%, var(--background))',
+            '--normal-text': 'var(--destructive)',
+            '--normal-border': 'var(--destructive)'
+          } as React.CSSProperties
+        });
+      },
+    },
+  });
 
   if (!clientLoaded) {
     return <div className="h-screen w-screen bg-gradient-to-br from-background to-secondary" />;
@@ -44,7 +63,11 @@ const Index = () => {
               defaultSize={isMobile ? 35 : 40}
               minSize={isMobile ? 35 : 20}
             >
-              <FestivalList />
+              <FestivalList
+                festivals={data?.festivals || []}
+                isLoading={isLoading}
+                error={error as Error}
+              />
             </ResizablePanel>
           </ResizablePanelGroup>
         </div>
