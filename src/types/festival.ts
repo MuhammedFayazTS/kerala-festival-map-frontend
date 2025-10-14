@@ -1,10 +1,10 @@
 export interface Festival {
     id: number;
     name: string;
-    malayalamName: string;
+    malayalamName?: string;
     startDate: string | Date;
     endDate: string | Date;
-    malayalamDate: string;
+    malayalamDate?: string;
     isMajor: boolean;
     location: {
         district: string;
@@ -14,9 +14,9 @@ export interface Festival {
             longitude: number | null;
         };
     };
-    description: string;
-    images: string[];
-    tags: string[];
+    description?: string;
+    images?: string[];
+    tags?: string[];
 }
 
 export type KeralaDistrict =

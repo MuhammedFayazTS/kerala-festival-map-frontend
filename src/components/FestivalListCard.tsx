@@ -39,7 +39,7 @@ export function FestivalListCard({ festival }: { festival: Festival }) {
                     </div>
 
                     <div className="flex flex-wrap gap-0.5 md:gap-2 mt-1 md:mt-3">
-                        {tags.map((tag) => (
+                        {tags?.map((tag) => (
                             <Badge key={tag} variant="secondary">
                                 {tag}
                             </Badge>
