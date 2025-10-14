@@ -13,7 +13,7 @@ function App() {
     <ThemeProvider defaultTheme="light" storageKey="festival-map-ui-theme">
       <QueryClientProvider client={queryClient}>
         <Toaster />
-        <div className="h-screen flex flex-col overflow-hidden">
+        <div className="h-screen flex flex-col overflow-hidden relative">
           <Header />
           <BrowserRouter>
             <div className="flex-1 overflow-hidden">

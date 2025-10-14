@@ -18,7 +18,7 @@ export function FestivalListCard({ festival }: { festival: Festival }) {
             ).toLocaleDateString()}`
 
     return (
-        <Card className="w-full max-w-3xl overflow-hidden rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-0 my-3">
+        <Card className="w-full max-w-3xl overflow-hidden rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-0">
             <div className="flex flex-row h-full">
                 <div className="w-1/3 relative">
                     <img

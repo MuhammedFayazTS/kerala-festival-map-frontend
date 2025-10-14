@@ -18,3 +18,19 @@ export interface Festival {
     images: string[];
     tags: string[];
 }
+
+export type KeralaDistrict =
+    | "thiruvananthapuram"
+    | "kollam"
+    | "pathanamthitta"
+    | "alappuzha"
+    | "kottayam"
+    | "idukki"
+    | "ernakulam"
+    | "thrissur"
+    | "palakkad"
+    | "malappuram"
+    | "kozhikode"
+    | "wayanad"
+    | "kannur"
+    | "kasaragod"

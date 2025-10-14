@@ -62,6 +62,7 @@ const Index = () => {
             <ResizablePanel
               defaultSize={isMobile ? 35 : 40}
               minSize={isMobile ? 35 : 20}
+              maxSize={isMobile ? 80 : 70}
             >
               <FestivalList
                 festivals={data?.festivals || []}
