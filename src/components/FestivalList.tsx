@@ -12,6 +12,7 @@ import { ModeToggle } from "./ui/mode-toggle";
 import { useMemo, useState } from "react";
 import type { DateRange } from "react-day-picker";
 import { DistrictSelect } from "./select/DistrictSelect";
+import { useFestivalContext } from "@/context/FilteredFestivalContext";
 
 interface FestivalListProps {
     festivals: Festival[];
@@ -20,9 +21,13 @@ interface FestivalListProps {
 }
 
 const FestivalList = ({ festivals, isLoading, error }: FestivalListProps) => {
-    const [range, setRange] = useState<DateRange | undefined>()
+    const [range, setRange] = useState<DateRange | undefined>({
+        from: new Date(),
+        to: new Date(2030, 12, 30)
+    })
     const [searchTerm, setSearchTerm] = useState<string>('')
     const [selectedDistrict, setSelectedDistrict] = useState<KeralaDistrict | undefined>()
+    const { setFilteredFestivals } = useFestivalContext()
 
     const filterWithinRange = (festivals: Festival[], range: DateRange | undefined) => {
         if (!range) return festivals
@@ -98,8 +103,9 @@ const FestivalList = ({ festivals, isLoading, error }: FestivalListProps) => {
 
         if (searchTerm) result = searchFestivals(result, searchTerm)
 
+        setFilteredFestivals(result)
         return result
-    }, [festivals, range, searchTerm, selectedDistrict])
+    }, [festivals, range, searchTerm, selectedDistrict, setFilteredFestivals])
 
     if (error) return <div className="flex items-center justify-center h-full p-4">
         <Alert
@@ -127,7 +133,7 @@ const FestivalList = ({ festivals, isLoading, error }: FestivalListProps) => {
                     </div>
                 </div>
 
-                <div className="flex flex-col sm:flex-row sm:flex-wrap gap-2 min-w-0 max-w-full mt-3">
+                <div className="flex flex-col gap-2 min-w-0 max-w-full mt-3">
                     <div className="relative flex-1 min-w-0 sm:min-w-[130px]">
                         <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
                         <Input

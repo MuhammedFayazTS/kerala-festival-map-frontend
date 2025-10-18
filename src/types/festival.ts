@@ -7,11 +7,11 @@ export interface Festival {
     malayalamDate?: string;
     isMajor: boolean;
     location: {
-        district: string;
+        district: string | null;
         place: string;
         coordinates: {
-            latitude: number | null;
-            longitude: number | null;
+            latitude: number;
+            longitude: number;
         };
     };
     description?: string;

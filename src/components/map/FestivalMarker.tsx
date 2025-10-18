@@ -5,10 +5,13 @@ import type { Festival } from "@/types/festival";
 import type { ReactNode } from "react";
 
 import TempleIco from "@/assets/icons/temple.svg"
+import RitualIco from "@/assets/icons/ritual.svg"
+import FestivalIco from "@/assets/icons/candle.svg"
 import DrumIco from "@/assets/icons/drum.svg"
 import Boat from "@/assets/icons/boat.svg"
 import Food from "@/assets/icons/food.svg"
-import KathakaliIco from "@/assets/icons/kathakali.svg"
+import DanceIcon from "@/assets/icons/dance.svg"
+// import KathakaliIco from "@/assets/icons/kathakali.svg"
 
 interface FestivalMarkerProps {
     festival: Festival;
@@ -16,92 +19,83 @@ interface FestivalMarkerProps {
 }
 
 const getFestivalIcon = (tags: string[]): ReactNode => {
-    const lowerTags = tags.map(tag => tag.toLowerCase());
+    const lowerTags = tags.map((tag) => tag.toLowerCase());
 
-    if (lowerTags.includes("temple")) return <img
-        src={TempleIco}
-        className="w-8 h-8"
-    />;
-    if (lowerTags.includes("ritual")) return <img
-        src={TempleIco}
-        className="w-8 h-8"
-    />;
-    if (lowerTags.includes("music")) return <img
-        src={DrumIco}
-        className="w-8 h-8"
-    />;
-    if (lowerTags.includes("boat")) return <img
-        src={Boat}
-        className="w-8 h-8"
-    />;
-    if (lowerTags.includes("dance")) return <img
-        src={KathakaliIco}
-        className="w-8 h-8"
-    />;
-    if (lowerTags.includes("food")) return <img
-        src={Food}
-        className="w-8 h-8"
-    />;
+    const baseIconStyle = "w-7 h-7 drop-shadow-[0_0_2px_rgba(255,255,255,0.8)]";
 
-    return <img
-        src={KathakaliIco}
-        className="w-8 h-8"
-    />;
+    if (lowerTags.includes("temple")) return <img src={TempleIco} className={baseIconStyle} />;
+    if (lowerTags.includes("ritual")) return <img src={RitualIco} className={baseIconStyle} />;
+    if (lowerTags.includes("music") || lowerTags.includes("music festival")) return <img src={DrumIco} className={baseIconStyle} />;
+    if (lowerTags.includes("boat") || lowerTags.includes("boat race")) return <img src={Boat} className={baseIconStyle} />;
+    if (lowerTags.includes("dance") || lowerTags.includes("dance festival")) return <img src={DanceIcon} className={baseIconStyle} />;
+    if (lowerTags.includes("food")) return <img src={Food} className={baseIconStyle} />;
+
+    return <img src={FestivalIco} className={baseIconStyle} />;
 };
 
-const getFestivalClassNames = (tags?: string[]): { gradient: string; border: string } => {
-    if (!tags || !tags?.length) return {
-        gradient: "bg-gradient-to-br from-yellow-200 via-orange-300 to-red-300",
-        border: "border-yellow-500",
-    };
 
-    const lowerTags = tags?.map(tag => tag.toLowerCase());
-
-    if (lowerTags.includes("temple") || lowerTags.includes("ritual")) {
+const getFestivalClassNames = (tags?: string[]): { gradient: string; border: string; glow: string } => {
+    if (!tags || !tags.length)
         return {
-            gradient: "bg-gradient-to-br from-yellow-200 via-orange-300 to-red-300",
+            gradient: "bg-gradient-to-tr from-amber-300 via-yellow-200 to-white",
             border: "border-yellow-500",
+            glow: "shadow-[0_0_12px_rgba(255,215,0,0.5)]",
         };
-    }
 
-    if (lowerTags.includes("music")) {
-        return {
-            gradient: "bg-gradient-to-br from-pink-200 via-purple-300 to-indigo-400",
-            border: "border-pink-500",
-        };
-    }
+    const lowerTags = tags.map((tag) => tag.toLowerCase());
 
-    if (lowerTags.includes("boat")) {
+    if (lowerTags.includes("temple"))
         return {
-            gradient: "bg-gradient-to-br from-blue-200 via-teal-300 to-green-300",
-            border: "border-blue-500",
+            gradient: "bg-gradient-to-tr from-yellow-200 via-orange-100 to-red-200",
+            border: "border-yellow-500",
+            glow: "shadow-[0_0_12px_rgba(255,165,0,0.6)]",
         };
-    }
 
-    if (lowerTags.includes("dance")) {
+    if (lowerTags.includes("ritual"))
         return {
-            gradient: "bg-gradient-to-br from-purple-200 via-pink-300 to-red-300",
-            border: "border-amber-500",
+            gradient: "bg-gradient-to-tr from-red-200 via-orange-300 to-yellow-400",
+            border: "border-yellow-500",
+            glow: "shadow-[0_0_12px_rgba(255,165,0,0.6)]",
         };
-    }
 
-    if (lowerTags.includes("food")) {
+    if (lowerTags.includes("music") || lowerTags.includes("music festival"))
         return {
-            gradient: "bg-gradient-to-br from-yellow-100 via-green-200 to-emerald-200",
-            border: "border-green-400",
+            gradient: "bg-gradient-to-tr from-purple-300 via-rose-300 to-amber-200",
+            border: "border-rose-400",
+            glow: "shadow-[0_0_12px_rgba(147,112,219,0.6)]",
         };
-    }
+
+    if (lowerTags.includes("boat") || lowerTags.includes("boat race"))
+        return {
+            gradient: "bg-gradient-to-tr from-sky-300 via-teal-400 to-emerald-400",
+            border: "border-cyan-500",
+            glow: "shadow-[0_0_12px_rgba(0,191,255,0.6)]",
+        };
+
+    if (lowerTags.includes("dance") || lowerTags.includes("dance festival"))
+        return {
+            gradient: "bg-gradient-to-tr from-pink-200 via-purple-300 to-indigo-400",
+            border: "border-fuchsia-500",
+            glow: "shadow-[0_0_12px_rgba(199,21,133,0.6)]",
+        };
+
+    if (lowerTags.includes("food"))
+        return {
+            gradient: "bg-gradient-to-tr from-lime-200 via-green-300 to-emerald-400",
+            border: "border-emerald-500",
+            glow: "shadow-[0_0_12px_rgba(50,205,50,0.6)]",
+        };
 
     return {
-        gradient: "bg-gradient-to-br from-green-200 via-yellow-200 to-red-200",
+        gradient: "bg-gradient-to-tr from-amber-300 via-yellow-200 to-white",
         border: "border-yellow-500",
+        glow: "shadow-[0_0_12px_rgba(255,215,0,0.5)]",
     };
 };
-
 
 const FestivalMarker = ({ festival, isCollapsed = false }: FestivalMarkerProps) => {
     const { name, startDate, endDate, location, tags = [] } = festival;
-    const { gradient, border } = getFestivalClassNames(festival.tags);
+    const { gradient, border, glow } = getFestivalClassNames(festival.tags);
 
     const today = new Date();
     const start = new Date(startDate);
@@ -122,17 +116,25 @@ const FestivalMarker = ({ festival, isCollapsed = false }: FestivalMarkerProps) 
             )}
 
             <div
-                className={`flex items-center justify-center w-12 h-12 rounded-full shadow-xl border-2 
-                 ${gradient} ${border}
-                 transform transition-transform duration-300 group-hover:scale-110 animate-bounce-slow`}
+                className={`relative flex items-center justify-center w-14 h-14 rounded-full border-2 ${gradient} ${border} ${glow}
+                transition-all duration-300 transform hover:scale-110 active:scale-95`}
             >
-                <span className="text-white text-xl">{getFestivalIcon(tags)}</span>
+                <div className="flex items-center justify-center w-12 h-12 rounded-full bg-white/20 backdrop-blur-sm">
+                    {getFestivalIcon(tags)}
+                </div>
+
+                {isActive && (
+                    <span
+                        className={`absolute inset-0 rounded-full animate-pulse opacity-70 ${glow}`}
+                    ></span>
+                )}
             </div>
 
+
             {!isCollapsed && (
-                <div className="absolute left-14 top-1/2 -translate-y-1/2 z-30 hidden group-hover:block">
+                <div className="absolute left-14 top-1/2 -translate-y-1/2 z-50 hidden group-hover:block">
                     <Card className="w-64 shadow-2xl border border-gray-200 bg-white dark:border-gray-700 dark:bg-gray-800 rounded-lg relative">
-                        {/* Pointer Arrow */}
+
                         <div
                             className="absolute -left-3 top-1/2 -translate-y-1/2 w-3 h-3 bg-white dark:bg-gray-800 rotate-45 border-l border-t border-gray-200 dark:border-gray-700"
                         ></div>
