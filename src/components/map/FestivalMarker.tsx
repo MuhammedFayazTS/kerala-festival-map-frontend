@@ -16,6 +16,7 @@ import DanceIcon from "@/assets/icons/dance.svg"
 interface FestivalMarkerProps {
     festival: Festival;
     isCollapsed?: boolean;
+    focusZoomOnClick: (id: number) => void;
 }
 
 const getFestivalIcon = (tags: string[]): ReactNode => {
@@ -93,7 +94,7 @@ const getFestivalClassNames = (tags?: string[]): { gradient: string; border: str
     };
 };
 
-const FestivalMarker = ({ festival, isCollapsed = false }: FestivalMarkerProps) => {
+const FestivalMarker = ({ festival, isCollapsed = false, focusZoomOnClick }: FestivalMarkerProps) => {
     const { name, startDate, endDate, location, tags = [] } = festival;
     const { gradient, border, glow } = getFestivalClassNames(festival.tags);
 
@@ -104,7 +105,9 @@ const FestivalMarker = ({ festival, isCollapsed = false }: FestivalMarkerProps) 
     const isActive = today >= start && today <= end;
 
     return (
-        <div className="relative group cursor-pointer select-none">
+        <div
+            onClick={() => focusZoomOnClick(festival.id)}
+            className="relative group cursor-pointer select-none">
 
             {/* Radar Wave */}
             {isActive && (
@@ -129,7 +132,6 @@ const FestivalMarker = ({ festival, isCollapsed = false }: FestivalMarkerProps) 
                     ></span>
                 )}
             </div>
-
 
             {!isCollapsed && (
                 <div className="absolute left-14 top-1/2 -translate-y-1/2 z-50 hidden group-hover:block">
