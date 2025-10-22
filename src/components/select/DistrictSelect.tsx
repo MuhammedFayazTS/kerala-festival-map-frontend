@@ -30,20 +30,29 @@ export const DistrictSelect: FC<IDistrictSelect> = ({
 }) => {
 
     return (
-            <Select
-                value={selectedDistrict}
-                onValueChange={(value: KeralaDistrict) => setSelectedDistrict(value)}
-            >
-                <SelectTrigger className="w-full max-w-full h-10 bg-background/90 border-border/50">
-                    <SelectValue placeholder="Select District..." />
-                </SelectTrigger>
-                <SelectContent>
-                    {districts.map(({ key, label }) => (
-                        <SelectItem key={key} value={key}>
-                            {label}
-                        </SelectItem>
-                    ))}
-                </SelectContent>
-            </Select>
+        <Select
+            value={selectedDistrict}
+            onValueChange={(value: KeralaDistrict | "__clear__") => {
+                if (value === "__clear__") {
+                    setSelectedDistrict(undefined);
+                } else {
+                    setSelectedDistrict(value);
+                }
+            }}
+        >
+            <SelectTrigger className="w-full max-w-full h-10 bg-background/90 border-border/50">
+                <SelectValue placeholder="Select District..." />
+            </SelectTrigger>
+            <SelectContent>
+                <SelectItem className="bg-red-800/50" value="__clear__">
+                    None
+                </SelectItem>
+                {districts.map(({ key, label }) => (
+                    <SelectItem key={key} value={key}>
+                        {label}
+                    </SelectItem>
+                ))}
+            </SelectContent>
+        </Select>
     )
 }

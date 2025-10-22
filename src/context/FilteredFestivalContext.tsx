@@ -3,19 +3,30 @@ import { createContext, useContext, useState, type Dispatch, type ReactNode, typ
 
 interface FilteredFestivalContextType {
     filteredFestivals: Festival[] | undefined;
-    setFilteredFestivals: Dispatch<SetStateAction<Festival[] | undefined>>
+    setFilteredFestivals: Dispatch<SetStateAction<Festival[] | undefined>>;
+    autoPanEnabled: boolean;
+    setAutoPanEnabled: Dispatch<SetStateAction<boolean>>;
 }
 
 const FilteredFestivalContext = createContext<FilteredFestivalContextType | undefined>(undefined);
 
 export const FilteredFestivalContextProvider = ({ children }: { children: ReactNode }) => {
-    const [filteredFestivals, setFilteredFestivals] = useState<Festival[]>()
+    const [filteredFestivals, setFilteredFestivals] = useState<Festival[]>();
+    const [autoPanEnabled, setAutoPanEnabled] = useState(true);
+
     return (
-        <FilteredFestivalContext.Provider value={{ filteredFestivals, setFilteredFestivals }}>
+        <FilteredFestivalContext.Provider
+            value={{
+                filteredFestivals,
+                setFilteredFestivals,
+                autoPanEnabled,
+                setAutoPanEnabled,
+            }}
+        >
             {children}
         </FilteredFestivalContext.Provider>
-    )
-}
+    );
+};
 
 export const useFestivalContext = () => {
     const context = useContext(FilteredFestivalContext);
