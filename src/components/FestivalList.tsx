@@ -120,7 +120,7 @@ const FestivalList = ({ festivals, isLoading, error }: FestivalListProps) => {
     </div>;
 
     return (
-        <Card className="mx-2 sm:mx-4 h-full flex flex-col bg-background border-none shadow-xl p-0 overflow-hidden">
+        <Card className="mx-1 mt-2 sm:mt-0 sm:mx-4 h-full flex flex-col bg-background border-none shadow-xl p-0 overflow-hidden">
             <CardHeader className="p-2 sm:p-4 border-b bg-muted dark:bg-muted/50">
                 <div className="flex items-center w-full">
                     <CardTitle className="text-md sm:text-sm lg:text-lg font-bold flex-1 min-w-0 truncate pr-3">

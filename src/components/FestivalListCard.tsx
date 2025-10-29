@@ -2,9 +2,7 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import type { Festival } from "@/types/festival"
 
-//TODO: replace with optimised vector image
-const fallbackImage =
-    "https://media.istockphoto.com/id/1381030718/photo/barsana-holi-one-of-the-most-joyful-festival-of-india-this-is-birth-place-of-radha-lord.jpg?s=612x612&w=0&k=20&c=c0kcjHpSFJXg7F4D6s8Ez-7RWY3MjoIrwsiRQKScank="
+import fallbackImage from "@/assets/fallback-festival.webp"
 
 export function FestivalListCard({ festival }: { festival: Festival }) {
     const { name, startDate, endDate, location, tags, images } = festival
@@ -24,7 +22,7 @@ export function FestivalListCard({ festival }: { festival: Festival }) {
                     <img
                         src={imageUrl}
                         alt={name}
-                        className="absolute inset-0 w-full h-full object-cover rounded-l-lg"
+                        className="absolute inset-0 w-full h-full object-contain sm:object-cover rounded-l-lg"
                     />
                 </div>
 

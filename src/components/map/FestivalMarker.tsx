@@ -95,7 +95,7 @@ const getFestivalClassNames = (tags?: string[]): { gradient: string; border: str
 };
 
 const FestivalMarker = ({ festival, isCollapsed = false, focusZoomOnClick }: FestivalMarkerProps) => {
-    const { name, startDate, endDate, location, tags = [] } = festival;
+    const { name, startDate, endDate, location, tags = [], images } = festival;
     const { gradient, border, glow } = getFestivalClassNames(festival.tags);
 
     const today = new Date();
@@ -123,7 +123,11 @@ const FestivalMarker = ({ festival, isCollapsed = false, focusZoomOnClick }: Fes
                 transition-all duration-300 transform hover:scale-110 active:scale-95`}
             >
                 <div className="flex items-center justify-center w-12 h-12 rounded-full bg-white/20 backdrop-blur-sm">
-                    {getFestivalIcon(tags)}
+                    {
+                        images?.[0] ? (
+                            <img src={images?.[0]} alt={name} loading="lazy" className="w-full h-full object-cover object-center" />
+                        ) : getFestivalIcon(tags)
+                    }
                 </div>
 
                 {isActive && (
