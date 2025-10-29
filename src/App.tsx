@@ -10,7 +10,7 @@ function App() {
   const queryClient = new QueryClient()
 
   return (
-    <ThemeProvider defaultTheme="light" storageKey="festival-map-ui-theme">
+    <ThemeProvider defaultTheme="dark" storageKey="festival-map-ui-theme">
       <QueryClientProvider client={queryClient}>
         <Toaster />
         <div className="h-screen flex flex-col overflow-hidden relative">

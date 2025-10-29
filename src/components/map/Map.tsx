@@ -88,7 +88,7 @@ const MapComponent: FC = () => {
     }, [filteredFestivals, autoPanEnabled]);
 
     return (
-        <section className="px-2 sm:px-3 py-2 sm:py-0 relative overflow-hidden w-full h-full rounded-xl bg-gray-50 dark:bg-neutral-900">
+        <section className="px-2 sm:px-0 py-2 sm:py-0 relative overflow-hidden w-full h-full rounded-xl bg-gray-50 dark:bg-neutral-900">
             <div className="absolute w-full h-full rounded-xl" ref={mapContainerRef} />
             <MapSettingsPopover />
         </section>
