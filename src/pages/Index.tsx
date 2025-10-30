@@ -9,8 +9,8 @@ import { useEffect, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { fetchFestivalData } from "@/lib/api";
 import { toast } from "sonner";
-import { FilteredFestivalContextProvider } from "@/context/FilteredFestivalContext";
 import { useResponsive } from "@/hooks/useResponsive";
+import { FilteredFestivalContextProvider } from "@/components/FilteredFestivalContextProvider";
 
 const Index = () => {
   const [clientLoaded, setClientLoaded] = useState(false);

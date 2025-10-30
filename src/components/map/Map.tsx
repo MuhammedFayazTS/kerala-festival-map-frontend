@@ -3,9 +3,9 @@ import mapboxgl from "mapbox-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
 import FestivalMarker from "./FestivalMarker";
 import { createRoot } from "react-dom/client";
-import { useFestivalContext } from "@/context/FilteredFestivalContext";
 import MapSettingsPopover from "./MapSettingsPopover";
 import MapHeader from "./MapHeader";
+import { useFestivalContext } from "@/hooks/useFestivalContext";
 
 const MapComponent: FC = () => {
     const mapRef = useRef<mapboxgl.Map | null>(null);

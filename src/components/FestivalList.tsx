@@ -9,10 +9,11 @@ import { AlertCircle } from "lucide-react";
 import { FestivalCardSkeleton } from "./FestivalCardSkeleton";
 import { DateRangePicker } from "./ui/date-range-picker";
 import { ModeToggle } from "./ui/mode-toggle";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import type { DateRange } from "react-day-picker";
 import { DistrictSelect } from "./select/DistrictSelect";
-import { useFestivalContext } from "@/context/FilteredFestivalContext";
+import { useDebounce } from "@/hooks/useDebounce";
+import { useFestivalContext } from "@/hooks/useFestivalContext";
 
 interface FestivalListProps {
     festivals: Festival[];
@@ -85,6 +86,8 @@ const FestivalList = ({ festivals, isLoading, error }: FestivalListProps) => {
         return festivals
     }
 
+    const debouncedSearchTerm = useDebounce(searchTerm, 300);
+
     const searchFestivals = (festivals: Festival[], searchTerm: string) => {
         return festivals.filter((festival) =>
             festival.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -101,11 +104,16 @@ const FestivalList = ({ festivals, isLoading, error }: FestivalListProps) => {
             result = filterWithinRange(result, range)
         }
 
-        if (searchTerm) result = searchFestivals(result, searchTerm)
+        if (debouncedSearchTerm) {
+            result = searchFestivals(result, debouncedSearchTerm);
+        }
 
-        setFilteredFestivals(result)
         return result
-    }, [festivals, range, searchTerm, selectedDistrict, setFilteredFestivals])
+    }, [debouncedSearchTerm, festivals, range, selectedDistrict])
+
+    useEffect(() => {
+        setFilteredFestivals(filteredFestivals);
+    }, [filteredFestivals, setFilteredFestivals]);
 
     if (error) return <div className="flex items-center justify-center h-full p-4">
         <Alert

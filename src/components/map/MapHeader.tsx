@@ -2,7 +2,7 @@ import logo from "@/assets/logo.png";
 
 const MapHeader = () => {
     return (
-        <header className="absolute top-7 left-7 md:left-10 z-10 flex justify-between w-full max-w-xs">
+        <header className="absolute top-4 left-4 md:left-3 md:top-3 z-10 flex justify-between w-full max-w-xs">
             <div className="
         w-fit flex items-center gap-2 px-3 py-1
         bg-white/70 dark:bg-black/40

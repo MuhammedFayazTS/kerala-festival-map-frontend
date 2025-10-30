@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
 import { Settings } from "lucide-react";
-import { useFestivalContext } from "@/context/FilteredFestivalContext";
+import { useFestivalContext } from "@/hooks/useFestivalContext";
 
 const MapSettingsPopover = () => {
     const { autoPanEnabled, setAutoPanEnabled } = useFestivalContext()
