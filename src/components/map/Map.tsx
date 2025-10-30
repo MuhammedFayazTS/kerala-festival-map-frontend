@@ -40,7 +40,7 @@ const MapComponent: FC = () => {
                     festival.location.coordinates.longitude,
                     festival.location.coordinates.latitude,
                 ],
-                zoom: 10,
+                zoom: 15,
                 essential: true,
             });
         }
@@ -82,7 +82,7 @@ const MapComponent: FC = () => {
                     first.location.coordinates.longitude,
                     first.location.coordinates.latitude,
                 ],
-                zoom: 15,
+                zoom: 10,
                 essential: true,
             });
         }
