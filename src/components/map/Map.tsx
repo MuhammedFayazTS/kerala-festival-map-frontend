@@ -5,6 +5,7 @@ import FestivalMarker from "./FestivalMarker";
 import { createRoot } from "react-dom/client";
 import { useFestivalContext } from "@/context/FilteredFestivalContext";
 import MapSettingsPopover from "./MapSettingsPopover";
+import MapHeader from "./MapHeader";
 
 const MapComponent: FC = () => {
     const mapRef = useRef<mapboxgl.Map | null>(null);
@@ -89,6 +90,7 @@ const MapComponent: FC = () => {
 
     return (
         <section className="px-2 sm:px-0 py-2 sm:py-0 relative overflow-hidden w-full h-full rounded-xl bg-gray-50 dark:bg-neutral-900">
+            <MapHeader />
             <div className="absolute w-full h-full rounded-xl" ref={mapContainerRef} />
             <MapSettingsPopover />
         </section>

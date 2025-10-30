@@ -3,9 +3,11 @@ import { Badge } from "@/components/ui/badge"
 import type { Festival } from "@/types/festival"
 
 import fallbackImage from "@/assets/fallback-festival.webp"
+import { useNavigate } from "react-router"
 
 export function FestivalListCard({ festival }: { festival: Festival }) {
-    const { name, startDate, endDate, location, tags, images } = festival
+    const { id, name, startDate, endDate, location, tags, images } = festival
+    const navigate = useNavigate()
 
     const imageUrl = images?.[0] || fallbackImage
     const formattedDate =
@@ -16,7 +18,9 @@ export function FestivalListCard({ festival }: { festival: Festival }) {
             ).toLocaleDateString()}`
 
     return (
-        <Card className="w-full max-w-3xl overflow-hidden rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-0">
+        <Card
+            onClick={() => navigate(`/${id}`)}
+            className="w-full max-w-3xl overflow-hidden rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-0 cursor-pointer">
             <div className="flex flex-row h-full">
                 <div className="w-1/3 relative">
                     <img

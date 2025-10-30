@@ -44,7 +44,7 @@ const Index = () => {
   return (
     <FilteredFestivalContextProvider>
       <div className={`h-full w-full relative isolate`}>
-        <div className="absolute inset-0 bg-gradient-to-b sm:bg-gradient-to-r from-green-200 via-gray-300 to-green-200 dark:from-green-950 dark:via-gray-800 dark:to-green-950 -z-10" />
+        <div className="absolute inset-0 bg-gradient-to-b sm:bg-gradient-to-r from-slate-200 via-gray-300 to-slate-200 dark:from-slate-800 dark:via-gray-800 dark:to-slate-800 -z-10" />
 
         <div className="absolute inset-0 p-2 sm:p-4 flex flex-col">
           <div className="flex-1 min-h-0 isolate">

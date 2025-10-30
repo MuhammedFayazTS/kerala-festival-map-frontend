@@ -2,8 +2,10 @@ export interface Festival {
     id: number;
     name: string;
     malayalamName?: string;
-    startDate: string | Date;
-    endDate: string | Date;
+    // startDate: string | Date;
+    // endDate: string | Date;
+    startDate: string;
+    endDate: string;
     malayalamDate?: string;
     isMajor: boolean;
     location: {

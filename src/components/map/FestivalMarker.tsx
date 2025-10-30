@@ -11,7 +11,6 @@ import DrumIco from "@/assets/icons/drum.svg"
 import Boat from "@/assets/icons/boat.svg"
 import Food from "@/assets/icons/food.svg"
 import DanceIcon from "@/assets/icons/dance.svg"
-// import KathakaliIco from "@/assets/icons/kathakali.svg"
 
 interface FestivalMarkerProps {
     festival: Festival;
@@ -33,7 +32,6 @@ const getFestivalIcon = (tags: string[]): ReactNode => {
 
     return <img src={FestivalIco} className={baseIconStyle} />;
 };
-
 
 const getFestivalClassNames = (tags?: string[]): { gradient: string; border: string; glow: string } => {
     if (!tags || !tags.length)
