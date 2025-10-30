@@ -2,7 +2,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { CalendarDays, MapPin } from "lucide-react";
 import type { Festival } from "@/types/festival";
-import type { ReactNode } from "react";
+import { useEffect, useRef, useState, type ReactNode } from "react";
 
 import TempleIco from "@/assets/icons/temple.svg"
 import RitualIco from "@/assets/icons/ritual.svg"
@@ -11,12 +11,15 @@ import DrumIco from "@/assets/icons/drum.svg"
 import Boat from "@/assets/icons/boat.svg"
 import Food from "@/assets/icons/food.svg"
 import DanceIcon from "@/assets/icons/dance.svg"
+import { useIsNonHoverableDevice } from "@/hooks/useIsNonHoverableDevice";
 
 interface FestivalMarkerProps {
     festival: Festival;
     isCollapsed?: boolean;
     focusZoomOnClick: (id: number) => void;
 }
+
+const AUTO_DISMISS_DELAY = 2500;
 
 const getFestivalIcon = (tags: string[]): ReactNode => {
     const lowerTags = tags.map((tag) => tag.toLowerCase());
@@ -93,6 +96,10 @@ const getFestivalClassNames = (tags?: string[]): { gradient: string; border: str
 };
 
 const FestivalMarker = ({ festival, isCollapsed = false, focusZoomOnClick }: FestivalMarkerProps) => {
+    const [isOpen, setIsOpen] = useState(false);
+    const inactivityTimeoutRef = useRef<number | null>(null);
+    const isTouchDevice = useIsNonHoverableDevice();
+
     const { name, startDate, endDate, location, tags = [], images } = festival;
     const { gradient, border, glow } = getFestivalClassNames(festival.tags);
 
@@ -102,9 +109,31 @@ const FestivalMarker = ({ festival, isCollapsed = false, focusZoomOnClick }: Fes
 
     const isActive = today >= start && today <= end;
 
+    useEffect(() => {
+        if (!isOpen) return;
+
+        inactivityTimeoutRef.current = window.setTimeout(() => {
+            setIsOpen(false);
+        }, AUTO_DISMISS_DELAY);
+
+        return () => {
+            if (inactivityTimeoutRef.current) {
+                clearTimeout(inactivityTimeoutRef.current);
+                inactivityTimeoutRef.current = null;
+            }
+        };
+    }, [isOpen]);
+
+    const toggleOpen = () => {
+        focusZoomOnClick(festival.id);
+        if (isTouchDevice) {
+            setIsOpen((prev) => !prev);
+        }
+    };
+
     return (
         <div
-            onClick={() => focusZoomOnClick(festival.id)}
+            onClick={toggleOpen}
             className="relative group cursor-pointer select-none">
 
             {/* Radar Wave */}
@@ -136,7 +165,8 @@ const FestivalMarker = ({ festival, isCollapsed = false, focusZoomOnClick }: Fes
             </div>
 
             {!isCollapsed && (
-                <div className="absolute left-14 top-1/2 -translate-y-1/2 z-50 hidden group-hover:block">
+                <div className={`absolute left-14 top-1/2 -translate-y-1/2 z-50 
+                 ${isTouchDevice ? (isOpen ? "block" : "hidden") : "hidden group-hover:block"}`}>
                     <Card className="w-64 shadow-2xl border border-gray-200 bg-white dark:border-gray-700 dark:bg-gray-800 rounded-lg relative">
 
                         <div

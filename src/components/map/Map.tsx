@@ -82,7 +82,7 @@ const MapComponent: FC = () => {
                     first.location.coordinates.longitude,
                     first.location.coordinates.latitude,
                 ],
-                zoom: 10,
+                zoom: 15,
                 essential: true,
             });
         }
